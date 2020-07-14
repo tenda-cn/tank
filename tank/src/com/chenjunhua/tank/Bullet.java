@@ -3,8 +3,6 @@ package com.chenjunhua.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
 public class Bullet {
 	private static final int SPEED = 10;
 	private static final int WIDTH = 5, HEIGHT = 5; 
@@ -18,9 +16,10 @@ public class Bullet {
 	}
 	
 	public void paint(Graphics g) {
+		Color color = g.getColor();
 		g.setColor(Color.red);
 		g.fillOval(x, y, WIDTH, HEIGHT);
-		
+		g.setColor(color);
 		move();
 	}
 
