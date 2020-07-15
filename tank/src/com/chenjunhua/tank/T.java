@@ -1,6 +1,5 @@
 package com.chenjunhua.tank;
 
-
 public class T {
 	public static void main(String[] args) throws InterruptedException {
 		TankFrame tf = new TankFrame();
