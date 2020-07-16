@@ -1,16 +1,21 @@
 package com.chenjunhua.tank;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class Tank {
 	private int x,y;
 	private Group group = Group.BAD;
 	private Dir dir = Dir.DOWN;
+	
 	private boolean living = true;
 	private Random random = new Random();
+	Rectangle rect = new Rectangle();
+	
 	public static int WIDTH = ResourcesMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourcesMgr.goodTankU.getHeight();
+	
 	private boolean moving = true;
 	private  static final int SPEED = 5;
 	private TankFrame tf = null;
@@ -34,6 +39,11 @@ public class Tank {
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		
+		rect.x = x;
+		rect.y = y;
+		rect.width = WIDTH;
+		rect.height = HEIGHT;
 	}
 	public void paint(Graphics g) {
 		if(!living) this.tf.tanks.remove(this) ;
@@ -86,6 +96,10 @@ public class Tank {
 		if(this.group == Group.BAD && random.nextInt(100)>95)
 			randomDir();
 		boundsCheck();
+		
+		//update rect
+		rect.x = x;
+		rect.y = y;
 	}
 	private void boundsCheck() {
 		if(this.x < 0) x = 0;
