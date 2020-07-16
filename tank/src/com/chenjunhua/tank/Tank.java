@@ -86,12 +86,13 @@ public class Tank {
 		default:
 			break;
 		}
+
 		
 		if(this.group == Group.GOOD)
 			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95) 
-			this.fire();
+			fire(this,new CommonFire());
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95)
 			randomDir();
@@ -100,6 +101,7 @@ public class Tank {
 		//update rect
 		rect.x = x;
 		rect.y = y;
+		
 	}
 	private void boundsCheck() {
 		if(this.x < 0) x = 0;
@@ -113,12 +115,13 @@ public class Tank {
 		this.dir = Dir.values()[random.nextInt(4)];
 		
 	}
-	public void fire() {
+	public void fire(Tank tank,FireStrategy fireStrategy) {
 		if(this.group == Group.GOOD)
 			new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
 		
 		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+		fireStrategy.fire();
 		tf.bullets.add(new Bullet(bX, bY, dir,tf,this.group));
 	}
 	public int getX() {
