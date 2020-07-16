@@ -12,7 +12,7 @@ public class Tank {
 	public static int WIDTH = ResourcesMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourcesMgr.goodTankU.getHeight();
 	private boolean moving = true;
-	private  static final int SPEED = 2;
+	private  static final int SPEED = 5;
 	private TankFrame tf = null;
 	
 	public boolean isMoving() {
@@ -76,6 +76,7 @@ public class Tank {
 		default:
 			break;
 		}
+		
 		if(this.group == Group.GOOD)
 			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 		
@@ -84,6 +85,15 @@ public class Tank {
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95)
 			randomDir();
+		boundsCheck();
+	}
+	private void boundsCheck() {
+		if(this.x < 0) x = 0;
+		if(this.y < 30) y = 30;
+		if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
+		if(this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+		
+		
 	}
 	private void randomDir() {
 		this.dir = Dir.values()[random.nextInt(4)];
