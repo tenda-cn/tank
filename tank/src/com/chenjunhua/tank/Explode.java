@@ -20,14 +20,14 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
-		new Audio("audio/explode.wav").play();
+		//new Thread(()->new Audio("audio/explode.wav").loop()).start();
 	
 	}
 	
 	public void paint(Graphics g) {
 		g.drawImage(ResourcesMgr.explodes[step++], x, y, null);
 		if(step>=ResourcesMgr.explodes.length)
-			step = 0;
+			tf.explodes.remove(this);
 	}
 
 }

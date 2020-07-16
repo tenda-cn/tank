@@ -1,5 +1,4 @@
 package com.chenjunhua.tank;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -75,6 +74,7 @@ public class Bullet {
 		if(rect1.intersects(rect2)) {
 			tank.die();
 			this.die();
+			tf.explodes.add(new Explode(x, y, tf));
 		}
 		
 	}

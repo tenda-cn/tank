@@ -12,7 +12,7 @@ public class Tank {
 	public static int WIDTH = ResourcesMgr.tankD.getWidth();
 	public static int HEIGHT = ResourcesMgr.tankD.getHeight();
 	private boolean moving = true;
-	private  static final int SPEED = 1;
+	private  static final int SPEED = 2;
 	private TankFrame tf = null;
 	
 	public boolean isMoving() {
@@ -76,9 +76,23 @@ public class Tank {
 		default:
 			break;
 		}
-		if(random.nextInt(10)>8) this.fire();
+		if(this.group == Group.GOOD)
+			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+		
+		if(this.group == Group.BAD && random.nextInt(100)>95) 
+			this.fire();
+		
+		if(this.group == Group.BAD && random.nextInt(100)>95)
+			randomDir();
+	}
+	private void randomDir() {
+		this.dir = Dir.values()[random.nextInt(4)];
+		
 	}
 	public void fire() {
+		if(this.group == Group.GOOD)
+			new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+		
 		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 		tf.bullets.add(new Bullet(bX, bY, dir,tf,this.group));

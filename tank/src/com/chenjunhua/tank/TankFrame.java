@@ -12,9 +12,10 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 	Tank myTank = new Tank(200, 400, Dir.DOWN, this,Group.GOOD);
+	
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> tanks = new ArrayList<Tank>();
-	Explode explode = new Explode(100, 100, this);
+	List<Explode> explodes = new ArrayList<Explode>();
 	
 	static final int GAME_WIDTH = 1080;
 	static final int GAME_HEIGHT = 960;
@@ -44,7 +45,9 @@ public class TankFrame extends Frame {
 		g.drawString("敌人数量"+tanks.size(), 10, 80);
 		g.setColor(c);
 		
-		explode.paint(g);
+		for(int i=0;i<explodes.size();i++) {
+			explodes.get(i).paint(g);
+		}
 		
 		for(int i=0;i<bullets.size();i++) {
 			bullets.get(i).paint(g);
