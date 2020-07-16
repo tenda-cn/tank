@@ -18,7 +18,7 @@ public class Tank {
 	
 	private boolean moving = true;
 	private  static final int SPEED = 5;
-	private TankFrame tf = null;
+	public TankFrame tf = null;
 	
 	public boolean isMoving() {
 		return moving;
@@ -92,7 +92,7 @@ public class Tank {
 			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95) 
-			fire(this,new CommonFire());
+			fire(CommonFire.getInstance());
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95)
 			randomDir();
@@ -115,14 +115,9 @@ public class Tank {
 		this.dir = Dir.values()[random.nextInt(4)];
 		
 	}
-	public void fire(Tank tank,FireStrategy fireStrategy) {
-		if(this.group == Group.GOOD)
-			new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+	public void fire(FireStrategy fireStrategy) {
 		
-		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-		fireStrategy.fire();
-		tf.bullets.add(new Bullet(bX, bY, dir,tf,this.group));
+		fireStrategy.fire(this);
 	}
 	public int getX() {
 		return x;
