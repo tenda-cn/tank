@@ -10,12 +10,19 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chenjunhua.tank.abstractfactory.BaseExplode;
+import com.chenjunhua.tank.abstractfactory.DefaultFactory;
+import com.chenjunhua.tank.abstractfactory.GameFactory;
+import com.chenjunhua.tank.abstractfactory.RectFactory;
+
 public class TankFrame extends Frame {
 	Tank myTank = new Tank(200, 400, Dir.DOWN, this,Group.GOOD);
 	
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<Tank>();
-	List<Explode> explodes = new ArrayList<Explode>();
+	public List<Bullet> bullets = new ArrayList<>();
+	public List<Tank> tanks = new ArrayList<Tank>();
+	public List<BaseExplode> explodes = new ArrayList<>();
+	
+	GameFactory gf = new RectFactory();
 	
 	static final int GAME_WIDTH = 1080;
 	static final int GAME_HEIGHT = 960;
@@ -124,7 +131,7 @@ public class TankFrame extends Frame {
 				bD = false;
 				break;
 			case KeyEvent.VK_CONTROL:
-				myTank.fire(CommonFire.getInstance());
+				myTank.fire(FourDirFireStrategy.getInstance());
 				break;
 			}
 			setMainTankDir();

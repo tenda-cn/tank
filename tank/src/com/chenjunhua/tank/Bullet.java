@@ -88,7 +88,7 @@ public class Bullet {
 			
 			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
 			int eY = tank.getY() + Tank.HEIGHT/2 -Explode.HEIGHT/2;
-			tf.explodes.add(new Explode(eX, eY, tf));
+			tf.explodes.add(tf.gf.creatExplode(eX, eY, tf));
 		}
 		
 	}

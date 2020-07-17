@@ -4,3 +4,6 @@ tankSpeed=5
 bulletSpeed=10
 gameWidh=1080
 gameHeight=720
+#fireStrategy
+goodFS=com.chenjunhua.tank.FourDirFirStrategy
+badFS=com.chenjunhua.tank.CommonFirStrategy

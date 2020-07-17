@@ -1,13 +1,13 @@
-package com.chenjunhua.tank;
+package com.chenjunhua.tank.abstractfactory;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
-import com.chenjunhua.tank.abstractfactory.BaseBullet;
-import com.chenjunhua.tank.abstractfactory.BaseExplode;
+import com.chenjunhua.tank.Dir;
+import com.chenjunhua.tank.ResourcesMgr;
+import com.chenjunhua.tank.TankFrame;
 
-public class Explode extends BaseExplode {
+public class RectExplode extends BaseExplode {
 
 	public static int WIDTH = ResourcesMgr.explodes[1].getWidth();
 	public static int HEIGHT = ResourcesMgr.explodes[1].getHeight();
@@ -19,7 +19,7 @@ public class Explode extends BaseExplode {
 	private boolean living = true;
 	private TankFrame tf = null;
 	
-	public Explode(int x, int y, TankFrame tf) {
+	public RectExplode(int x, int y, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
@@ -28,9 +28,13 @@ public class Explode extends BaseExplode {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(ResourcesMgr.explodes[step++], x, y, null);
-		if(step>=ResourcesMgr.explodes.length)
+		Color color = g.getColor();
+		g.setColor(Color.RED);
+		g.fillRect(x, y, 10*step, 10*step);
+		step++;
+		if(step >= 5)
 			tf.explodes.remove(this);
+		g.setColor(color);
 	}
 
 }

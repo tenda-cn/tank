@@ -1,13 +1,13 @@
 package com.chenjunhua.tank;
 
-public class CommonFire implements FireStrategy {
+public class CommonFireStrategy implements FireStrategy {
 	
-	private static CommonFire instance = new CommonFire();
+	private static CommonFireStrategy instance = new CommonFireStrategy();
 	
-	private  CommonFire() {
+	private  CommonFireStrategy() {
 	}
 	
-	public static CommonFire getInstance() {
+	public static CommonFireStrategy getInstance() {
 		return instance;
 	}
 	

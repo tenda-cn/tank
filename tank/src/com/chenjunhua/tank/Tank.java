@@ -92,7 +92,7 @@ public class Tank {
 			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95) 
-			fire(CommonFire.getInstance());
+			fire(CommonFireStrategy.getInstance());
 		
 		if(this.group == Group.BAD && random.nextInt(100)>95)
 			randomDir();
