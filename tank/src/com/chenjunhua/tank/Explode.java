@@ -14,20 +14,19 @@ public class Explode extends GameObject {
 
 	private int step = 0;
 	private boolean living = true;
-	GameModel gm = null;
 	
-	public Explode(int x, int y, GameModel gm) {
+	public Explode(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.gm = gm;
 		//new Thread(()->new Audio("audio/explode.wav").loop()).start();
 	
+		GameModel.getInstance().add(this);
 	}
 	
 	public void paint(Graphics g) {
 		g.drawImage(ResourcesMgr.explodes[step++], x, y, null);
 		if(step>=ResourcesMgr.explodes.length)
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 	}
 
 

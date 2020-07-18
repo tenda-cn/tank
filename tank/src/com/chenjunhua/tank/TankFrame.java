@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame {
-	GameModel gm = new GameModel();
 	
 	static final int GAME_WIDTH = 1080;
 	static final int GAME_HEIGHT = 960;
@@ -34,7 +33,7 @@ public class TankFrame extends Frame {
 	}
 	@Override
 	public void paint(Graphics g) {
-		gm.paint(g);
+		GameModel.getInstance().paint(g);
 		
 	}
 	Image offScreenImage = null;
@@ -96,7 +95,7 @@ public class TankFrame extends Frame {
 				bD = false;
 				break;
 			case KeyEvent.VK_CONTROL:
-				gm.getMainTank().fire(CommonFire.getInstance());
+				GameModel.getInstance().getMainTank().fire(CommonFire.getInstance());
 				break;
 			}
 			setMainTankDir();
@@ -104,7 +103,7 @@ public class TankFrame extends Frame {
 
 		private void setMainTankDir() {
 			
-			Tank myTank = gm.getMainTank();
+			Tank myTank = GameModel.getInstance().getMainTank();
 			myTank.setMoving(true);
 			
 			if(bL) myTank.setDir(Dir.LEFT);

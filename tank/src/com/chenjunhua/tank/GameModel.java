@@ -9,13 +9,20 @@ import com.chenjunhua.tank.cor.ColliderChain;
 
 public class GameModel {
 	
+	private static GameModel instance = new GameModel();
+	
 	ColliderChain chain =new ColliderChain();
 	
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this,Group.GOOD);
+	Tank myTank;
 	
 	List<GameObject> objects = new ArrayList<>(); 
 		
-		
+	
+	public static GameModel getInstance() {
+		return instance;
+	}
+	
+	
 	public void add(GameObject object) {
 		objects.add(object);
 	}
@@ -24,13 +31,20 @@ public class GameModel {
 		objects.remove(object); 
 	}
 	
-	public GameModel() {
+	private GameModel() {
 
 		int initTankCount =Integer.parseInt((String)PropertiesMgr.get("initTankCount"));
 		
+		myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD);
+		
 		for(int i=0;i<initTankCount;i++) {
-			add(new Tank(50 + i*80, 200, Dir.DOWN, this,Group.BAD));
+			add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD));
 		}
+		
+		add(new Wall(150, 150, 200, 50));
+		add(new Wall(550, 150, 200, 50));
+		add(new Wall(300, 300, 50, 200));
+		add(new Wall(550, 300, 50, 200));
 		
 	}
 	

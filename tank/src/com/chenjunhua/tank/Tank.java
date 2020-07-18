@@ -19,7 +19,7 @@ public class Tank extends GameObject {
 	
 	private boolean moving = true;
 	private  static final int SPEED = 5;
-	public GameModel gm = null;
+
 	
 	public boolean isMoving() {
 		return moving;
@@ -34,11 +34,10 @@ public class Tank extends GameObject {
 		this.dir = dir;
 	}
 
-	public Tank(int x,int y,Dir dir,GameModel gm,Group group) {
+	public Tank(int x,int y,Dir dir, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
 		this.group = group;
 		
 		rect.x = x;
@@ -47,7 +46,7 @@ public class Tank extends GameObject {
 		rect.height = HEIGHT;
 	}
 	public void paint(Graphics g) {
-		if(!living)  gm.remove(this) ;
+		if(!living)  GameModel.getInstance().remove(this) ;
 		switch (dir) {
 		case LEFT:
 			g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankL : ResourcesMgr.badTankL, x, y, null);

@@ -14,13 +14,11 @@ public class Bullet extends GameObject {
 	public Rectangle rect = new Rectangle();
 	
 	private boolean living = true;
-	public GameModel gm = null;
 	
-	public Bullet(int x, int y, Dir dir, GameModel gm,Group group) {
+	public Bullet(int x, int y, Dir dir,Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
 		this.group = group;
 		
 		rect.x = x;
@@ -28,12 +26,12 @@ public class Bullet extends GameObject {
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
 		
-		gm.add(this);
+		GameModel.getInstance().add(this);
 	}
 	
 	public void paint(Graphics g) {
 		if(!living)
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 		switch (dir) {
 		case LEFT:
 			g.drawImage(ResourcesMgr.bulletL, x, y, null);
@@ -79,19 +77,6 @@ public class Bullet extends GameObject {
 			living = false;
 	}
 
-	public void collideWith(Tank tank) {
-		if(this.group == tank.getGroup()) return;
-		
-		if(rect.intersects(tank.rect)) {
-			tank.die();
-			this.die();
-			
-			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-			int eY = tank.getY() + Tank.HEIGHT/2 -Explode.HEIGHT/2;
-			gm.add(new Explode(eX, eY, gm));
-		}
-		
-	}
 	public void die() {
 		this.living = false;
 	}
