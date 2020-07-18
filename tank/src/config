@@ -4,3 +4,4 @@ tankSpeed=5
 bulletSpeed=10
 gameWidh=1080
 gameHeight=720
+colliders=com.chenjunhua.tank.cor.BulletTankCollider,com.chenjunhua.tank.cor.TwoTankCollider

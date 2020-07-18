@@ -3,18 +3,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Bullet {
+public class Bullet extends GameObject {
 	private static final int SPEED = 10;
 	public static int WIDTH = ResourcesMgr.bulletD.getWidth();
 	public static int HEIGHT = ResourcesMgr.bulletD.getHeight();
 	
 	private int x,y;
 	private Dir dir;
-	private Group group = Group.BAD;
-	Rectangle rect = new Rectangle();
+	public Group group = Group.BAD;
+	public Rectangle rect = new Rectangle();
 	
 	private boolean living = true;
-	GameModel gm = null;
+	public GameModel gm = null;
 	
 	public Bullet(int x, int y, Dir dir, GameModel gm,Group group) {
 		this.x = x;
@@ -28,12 +28,12 @@ public class Bullet {
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
 		
-		gm.bullets.add(this);
+		gm.add(this);
 	}
 	
 	public void paint(Graphics g) {
 		if(!living)
-			gm.bullets.remove(this);
+			gm.remove(this);
 		switch (dir) {
 		case LEFT:
 			g.drawImage(ResourcesMgr.bulletL, x, y, null);
@@ -88,11 +88,11 @@ public class Bullet {
 			
 			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
 			int eY = tank.getY() + Tank.HEIGHT/2 -Explode.HEIGHT/2;
-			gm.explodes.add(new Explode(eX, eY, gm));
+			gm.add(new Explode(eX, eY, gm));
 		}
 		
 	}
-	private void die() {
+	public void die() {
 		this.living = false;
 	}
 
@@ -103,4 +103,6 @@ public class Bullet {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+
+	
 }

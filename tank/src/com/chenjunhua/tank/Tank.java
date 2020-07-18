@@ -4,14 +4,15 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
-public class Tank {
-	private int x,y;
+public class Tank extends GameObject {
+	public int x,y;
+	public int  preX, preY;
 	private Group group = Group.BAD;
 	private Dir dir = Dir.DOWN;
 	
 	private boolean living = true;
 	private Random random = new Random();
-	Rectangle rect = new Rectangle();
+	public Rectangle rect = new Rectangle();
 	
 	public static int WIDTH = ResourcesMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourcesMgr.goodTankU.getHeight();
@@ -46,7 +47,7 @@ public class Tank {
 		rect.height = HEIGHT;
 	}
 	public void paint(Graphics g) {
-		if(!living) this.gm.tanks.remove(this) ;
+		if(!living)  gm.remove(this) ;
 		switch (dir) {
 		case LEFT:
 			g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankL : ResourcesMgr.badTankL, x, y, null);
@@ -70,6 +71,9 @@ public class Tank {
 	}
 	private void move() {
 		if(!moving) return;
+		
+		preX = x;
+		preY = y;
 		switch (dir) {
 		case LEFT:
 			x -= SPEED; 
@@ -140,4 +144,12 @@ public class Tank {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+	public void stop() {
+		moving = false; 
+	}
+	public void turnDir() {
+		x = preX;
+		y = preY;
+	}
+	
 }
