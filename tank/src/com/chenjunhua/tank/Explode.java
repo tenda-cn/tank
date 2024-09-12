@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Explode {
+import com.chenjunhua.tank.abstractfactory.BaseBullet;
+import com.chenjunhua.tank.abstractfactory.BaseExplode;
+
+public class Explode extends BaseExplode {
 
 	public static int WIDTH = ResourcesMgr.explodes[1].getWidth();
 	public static int HEIGHT = ResourcesMgr.explodes[1].getHeight();

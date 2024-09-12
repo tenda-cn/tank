@@ -5,10 +5,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 public class ResourcesMgr {
+	
+	private ResourcesMgr instance = new ResourcesMgr();
 	public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
 	public static BufferedImage badTankL, badTankU, badTankR, badTankD;
 	public static BufferedImage bulletL, bulletU, bulletR, bulletD;
+	
 	public static BufferedImage[] explodes = new BufferedImage[16];
+	
+	private ResourcesMgr() {}
+	
+	public ResourcesMgr getInstance() {
+		return instance;
+	}
+	
 	static {
 		try {
 			badTankU = ImageIO.read(ResourcesMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
